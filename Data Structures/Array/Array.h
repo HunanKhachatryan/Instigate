@@ -10,8 +10,9 @@ class Array {
         Array(int size);
         ~Array();
         void insert(int index, int val);
-        void append(int val);
-        int pop();
+        void reSize(int newSize);
+        void print();
+        int getSize();
         int &operator[](int index);
         bool isEmpty();
 };

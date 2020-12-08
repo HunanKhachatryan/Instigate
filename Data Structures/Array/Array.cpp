@@ -1,6 +1,6 @@
 #include "Array.h"
 #include <stdexcept>
-#include "iostream"
+#include <iostream>
 
 // Default Constructor
 Array::Array(){
@@ -19,31 +19,29 @@ Array::~Array(){
 
 //insert value by index
 void Array::insert(int index, int val){
+    if (index >= size) throw std::out_of_range ("Out of range"); 
     array[index] = val;
 }
-//add value from behind
-void Array::append(int val){
-    size++;
-    int* newArray = new int[size];
-    for (int i =0; i<size-1; i++){
+//resize array
+void Array::reSize(int newSize) {
+    int* newArray = new int[newSize];
+    for (int i = 0, j = size; i<size , j < newSize; i++, j++){
         newArray[i] = array[i];
+        newArray[j] = 0;
     }
-    newArray[size-1] = val;
     delete[] array;
     array = newArray;
+    size = newSize;
 }
-
-//delete item from behind
-int Array::pop(){
-    size--;
-    int* newArray = new int[size];
-    for (int i =0; i<size-1; i++){
-        newArray[i] = array[i];
+// print array 
+void Array::print() {
+    for (int i = 0; i<size; i++){
+        std::cout << array[i] << std::endl;
     }
-    const int deletedItem = array[size];
-    delete[] array;
-    array = newArray;
-    return deletedItem;
+}
+// get size of array 
+int Array::getSize(){
+    return size;
 }
 //check array is empty
 bool Array:: isEmpty(){
